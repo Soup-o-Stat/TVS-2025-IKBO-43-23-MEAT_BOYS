@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://r41w0f6i3eyn"
+path="res://.godot/imported/Minigore- Battle.mp3-7bb54683d9c8690cc438c3c99f628656.mp3str"
+
+[deps]
+
+source_file="res://media/music/Minigore- Battle.mp3"
+dest_files=["res://.godot/imported/Minigore- Battle.mp3-7bb54683d9c8690cc438c3c99f628656.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

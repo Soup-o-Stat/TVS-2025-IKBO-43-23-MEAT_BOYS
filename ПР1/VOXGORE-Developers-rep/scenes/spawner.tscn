@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmhdrnne64jge"]
+
+[ext_resource type="ArrayMesh" uid="uid://dkfes83tbs8bl" path="res://media/models/spawner_mark.vox" id="2_ik2nu"]
+[ext_resource type="Script" uid="uid://d1xhsd4e5hlxn" path="res://scripts/spawner.gd" id="2_r47kd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ik2nu"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+metallic_specular = 1.0
+metallic_texture_channel = 3
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="Animation" id="Animation_cmhla"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnerMark:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tx2ig"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnerMark:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_6bbd6"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnerMark:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4wbs5"]
+_data = {
+&"RESET": SubResource("Animation_cmhla"),
+&"idle": SubResource("Animation_tx2ig"),
+&"spawn": SubResource("Animation_6bbd6")
+}
+
+[node name="spawner" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504402, 0)
+script = ExtResource("2_r47kd")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494339, 0.961219)
+
+[node name="SpawnerMark" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.589246, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ik2nu")
+mesh = ExtResource("2_ik2nu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4wbs5")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

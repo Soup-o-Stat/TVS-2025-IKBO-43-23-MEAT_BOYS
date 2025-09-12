@@ -1,0 +1,6 @@
+sfx
+
+crossbow_reload.mp3 - Gamemaster Audio
+crossbow_shoot.mp3 - Gamemaster Audio
+arrow.mp3 - soundsnap
+arena_button.mp3 - GFX Sounds

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwgl0psfvmvwj"]
+
+[ext_resource type="ArrayMesh" uid="uid://bydt2re12e4wh" path="res://media/models/lal_bullet.vox" id="1_hmv48"]
+[ext_resource type="Script" uid="uid://clxvhqk6gkqbe" path="res://scripts/bullet.gd" id="1_p71ve"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_y25gk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_biwot"]
+diffuse_mode = 3
+emission_enabled = true
+emission = Color(1, 0.992157, 0, 1)
+emission_energy_multiplier = 16.0
+rim = 0.22
+rim_tint = 1.0
+anisotropy = 0.08
+anisotropy_flowmap = SubResource("CurveTexture_y25gk")
+ao_light_affect = 1.0
+ao_texture_channel = 3
+backlight = Color(0.756863, 0, 0, 1)
+grow_amount = -0.552
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oqwgj"]
+size = Vector3(0.4021, 0.107483, 0.101685)
+
+[node name="bullet" type="Area3D"]
+script = ExtResource("1_p71ve")
+
+[node name="LalBullet" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.214448, 0.00943518, 0.0300502)
+material_override = SubResource("StandardMaterial3D_biwot")
+mesh = ExtResource("1_hmv48")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21521, 0.0606384, -0.00177002)
+shape = SubResource("BoxShape3D_oqwgj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.002
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

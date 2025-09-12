@@ -1,0 +1,4 @@
+extends Node3D
+
+func _ready():
+	DiscordHandler._update_discord_activity("Graveyard", "Debug")

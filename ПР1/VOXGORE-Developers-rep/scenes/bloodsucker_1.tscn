@@ -1,0 +1,406 @@
+[gd_scene load_steps=30 format=3 uid="uid://c3pcuf65fmbo1"]
+
+[ext_resource type="Script" uid="uid://cunmlx4heae10" path="res://scripts/bloodsucker_1.gd" id="1_w5uqv"]
+[ext_resource type="ArrayMesh" uid="uid://8u47my0l3vci" path="res://media/models/lal_bloodsucker1_body.vox" id="1_ynn8u"]
+[ext_resource type="ArrayMesh" uid="uid://bm2dkypv01q2y" path="res://media/models/lal_bloodsucker1_head.vox" id="2_h18pe"]
+[ext_resource type="Shader" uid="uid://8cgyfmpwfovn" path="res://shaders/blood.tres" id="4_ngm6a"]
+[ext_resource type="Shader" uid="uid://b6ebuoqrd3u36" path="res://shaders/blood_floor.tres" id="5_flkp0"]
+[ext_resource type="AudioStream" uid="uid://cyvm5nqdt5et1" path="res://media/sfx/hamster_hit.mp3" id="6_jkap8"]
+
+[sub_resource type="Animation" id="Animation_k3edy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("models/LalBloodsucker1Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.551524, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("models/LalBloodsucker1Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.303687, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("models/LalBloodsucker1Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.63173e-08, 0.0929129, -0.987355)]
+}
+
+[sub_resource type="Animation" id="Animation_s2ptg"]
+resource_name = "death"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("models/LalBloodsucker1Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("models/LalBloodsucker1Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("models/LalBloodsucker1Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.97, 0), Vector3(-8.63173e-08, 0.0929129, -0.987355)]
+}
+
+[sub_resource type="Animation" id="Animation_jkf7q"]
+resource_name = "hit_center"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("models/LalBloodsucker1Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.164061, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("models/LalBloodsucker1Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.97, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o8vqf"]
+resource_name = "hit_left"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("models/LalBloodsucker1Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.282743, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("models/LalBloodsucker1Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.164061, -0.443314, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("models/LalBloodsucker1Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.97, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vyr4y"]
+resource_name = "hit_right"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("models/LalBloodsucker1Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.282743, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("models/LalBloodsucker1Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.164061, 0.443314, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("models/LalBloodsucker1Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.97, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5lva4"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("models/LalBloodsucker1Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.552222, 0), Vector3(0, 0.551524, 0), Vector3(0, -0.552222, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("models/LalBloodsucker1Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.303687, 0, 0), Vector3(0.303687, 0, 0), Vector3(-0.303687, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("models/LalBloodsucker1Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.97, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmuts"]
+_data = {
+&"RESET": SubResource("Animation_k3edy"),
+&"death": SubResource("Animation_s2ptg"),
+&"hit_center": SubResource("Animation_jkf7q"),
+&"hit_left": SubResource("Animation_o8vqf"),
+&"hit_right": SubResource("Animation_vyr4y"),
+&"walk": SubResource("Animation_5lva4")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_at1gs"]
+radius = 0.830012
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxy38"]
+render_priority = 0
+shader = ExtResource("4_ngm6a")
+
+[sub_resource type="Curve" id="Curve_caf4c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.483516), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8dfuu"]
+curve = SubResource("Curve_caf4c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lckug"]
+angle_min = -492.5
+angle_max = 204.5
+spread = 180.0
+flatness = 0.232
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+angular_velocity_min = -358.96
+angular_velocity_max = 354.78
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+radial_accel_min = -11.59
+radial_accel_max = 9.28
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_8dfuu")
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkap8"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_prmyn"]
+material = SubResource("StandardMaterial3D_jkap8")
+uv2_padding = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqfh3"]
+render_priority = 0
+shader = ExtResource("5_flkp0")
+
+[sub_resource type="Curve" id="Curve_1wiko"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.297101, 1), 0.0, 0.0, 0, 0, Vector2(0.623188, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vm7io"]
+curve = SubResource("Curve_1wiko")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gbb8b"]
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_vm7io")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sxo8p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i74yg"]
+size = Vector3(0.401209, 1.18018, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o0l0x"]
+size = Vector3(0.401733, 0.885696, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o35qw"]
+size = Vector3(0.704849, 0.869995, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8tcqt"]
+size = Vector3(0.640106, 1.45386, 1.16223)
+
+[node name="bloodsucker1" type="CharacterBody3D"]
+rotation_order = 1
+script = ExtResource("1_w5uqv")
+
+[node name="models" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="LalBloodsucker1Body" type="MeshInstance3D" parent="models"]
+transform = Transform3D(0.851727, 0, 0.523986, 0, 1, 0, -0.523986, 0, 0.851727, 0, 0, 0)
+mesh = ExtResource("1_ynn8u")
+skeleton = NodePath("../..")
+
+[node name="LalBloodsucker1Head" type="MeshInstance3D" parent="models"]
+transform = Transform3D(1, 0, 0, 0, 0.95424, 0.29904, 0, -0.29904, 0.95424, -8.63173e-08, 0.0929129, -0.987355)
+mesh = ExtResource("2_h18pe")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pmuts")
+}
+autoplay = "walk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.037874, 0.828823, 0)
+shape = SubResource("SphereShape3D_at1gs")
+
+[node name="blood" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.0294568, 0, 0.999566, 0, 1, 0, -0.999566, 0, 0.0294568, -0.0760112, 0.620287, 0)
+material_override = SubResource("ShaderMaterial_kxy38")
+emitting = false
+amount = 80
+sub_emitter = NodePath("../blood_floor")
+one_shot = true
+speed_scale = 5.0
+randomness = 0.09
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_lckug")
+draw_pass_1 = SubResource("QuadMesh_prmyn")
+
+[node name="blood_floor" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_kqfh3")
+emitting = false
+amount = 900
+lifetime = 4.74
+speed_scale = 0.65
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_gbb8b")
+draw_pass_1 = SubResource("PlaneMesh_sxo8p")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="hit_left" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hit_left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.498412, 0.597412, 0)
+shape = SubResource("BoxShape3D_i74yg")
+
+[node name="hit_right" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hit_right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.600647, 0.456383, 0)
+shape = SubResource("BoxShape3D_o0l0x")
+
+[node name="hit_center" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hit_center"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.050087, 0.464905, 0)
+shape = SubResource("BoxShape3D_o35qw")
+
+[node name="attack_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="attack_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0213165, 0.658081, -0.658752)
+shape = SubResource("BoxShape3D_8tcqt")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.228797, 0.00171018)
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_jkap8")
+volume_db = 80.0
+max_distance = 20.0
+
+[connection signal="area_entered" from="hit_left" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="hit_left" to="." method="_on_area_3d_area_exited"]
+[connection signal="area_entered" from="hit_right" to="." method="_on_hit_right_area_entered"]
+[connection signal="area_entered" from="hit_center" to="." method="_on_hit_center_area_entered"]

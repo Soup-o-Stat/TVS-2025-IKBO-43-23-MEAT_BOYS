@@ -1,0 +1,208 @@
+[gd_scene load_steps=12 format=3 uid="uid://cyut0jq6r2v21"]
+
+[ext_resource type="Script" uid="uid://daml14ss43qyy" path="res://scripts/shop.gd" id="1_8r1wq"]
+[ext_resource type="ArrayMesh" uid="uid://ds6p756ue8v3w" path="res://media/models/table.vox" id="1_032fp"]
+[ext_resource type="ArrayMesh" uid="uid://1ygs51jw6iod" path="res://media/models/sam/sam_body.vox" id="2_2fc2m"]
+[ext_resource type="ArrayMesh" uid="uid://lcigd1podga3" path="res://media/models/sam/sam_head.vox" id="3_8r1wq"]
+[ext_resource type="ArrayMesh" uid="uid://c1q076528di7c" path="res://media/models/lal_player_hand.vox" id="4_ajxib"]
+[ext_resource type="Texture2D" uid="uid://jajmvaj2ipkm" path="res://media/gfx/shop/hp.png" id="6_ajxib"]
+
+[sub_resource type="Animation" id="Animation_m4ofw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SamBody/SamHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.868122, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SamBody/SamHead:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0850548, -0.312482, -0.0274383)]
+}
+
+[sub_resource type="Animation" id="Animation_y6sft"]
+resource_name = "idle_clear"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SamBody/SamHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.868122, 0), Vector3(0, 0.868122, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SamBody:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.12084)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SamBody/LalPlayerHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.038811, 0.597793, 1.14609)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SamBody/LalPlayerHand2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0146816, 0.588987, 1.2117)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SamBody/SamHead:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.5, 3, 3.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0850548, -0.312482, -0.0274383), Vector3(0.0850548, -0.312482, -0.0274383), Vector3(0.0355463, 0.280831, 0.0159097), Vector3(0.0355463, 0.280831, 0.0159097), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SamBody:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SamBody/LalPlayerHand:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SamBody/LalPlayerHand2:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_heatd"]
+_data = {
+&"RESET": SubResource("Animation_m4ofw"),
+&"idle_clear": SubResource("Animation_y6sft")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1v8qu"]
+size = Vector3(2.12561, 2.50635, 2.60596)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_032fp"]
+size = Vector3(3.20099, 2.49622, 2.8291)
+
+[node name="shop" type="StaticBody3D"]
+script = ExtResource("1_8r1wq")
+
+[node name="Table" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_032fp")
+
+[node name="SamBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.12084)
+mesh = ExtResource("2_2fc2m")
+
+[node name="SamHead" type="MeshInstance3D" parent="SamBody"]
+transform = Transform3D(0.951932, -3.53903e-08, -0.30631, -0.0273357, 0.99601, -0.0849523, 0.305088, 0.089242, 0.948134, 0, 0.868122, 0)
+mesh = ExtResource("3_8r1wq")
+skeleton = NodePath("../..")
+
+[node name="LalPlayerHand" type="MeshInstance3D" parent="SamBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038811, 0.597793, 1.14609)
+mesh = ExtResource("4_ajxib")
+skeleton = NodePath("../..")
+
+[node name="LalPlayerHand2" type="MeshInstance3D" parent="SamBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0146816, 0.588987, 1.2117)
+mesh = ExtResource("4_ajxib")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_heatd")
+}
+autoplay = "idle_clear"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984497, 0.753174, -0.802979)
+shape = SubResource("BoxShape3D_1v8qu")
+
+[node name="shop_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="shop_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133972, 0.748108, -0.280762)
+shape = SubResource("BoxShape3D_032fp")
+debug_color = Color(0.940373, 8.66354e-06, 0.615292, 0.42)
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="Hp" type="Sprite2D" parent="Node2D"]
+position = Vector2(80, 80)
+texture = ExtResource("6_ajxib")
+
+[node name="Hp2" type="Sprite2D" parent="Node2D"]
+position = Vector2(160, 80)
+texture = ExtResource("6_ajxib")
+
+[node name="Hp3" type="Sprite2D" parent="Node2D"]
+position = Vector2(240, 80)
+texture = ExtResource("6_ajxib")
+
+[connection signal="area_entered" from="shop_area" to="." method="_on_shop_area_area_entered"]
+[connection signal="area_exited" from="shop_area" to="." method="_on_shop_area_area_exited"]

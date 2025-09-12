@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btfwnh8ipegeu"]
+
+[ext_resource type="Script" uid="uid://c0mkkov0jdi21" path="res://scripts/discord_handler.gd" id="1_xcxm1"]
+
+[node name="discord_handler" type="Node"]
+script = ExtResource("1_xcxm1")

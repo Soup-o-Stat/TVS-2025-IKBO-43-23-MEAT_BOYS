@@ -1,6 +1,7 @@
 import time
 import core.convert_script as conversions
 
+# Функция запуска
 def startup():
     print("""
 $$$$$$\   $$$$$$\  $$\   $$\ $$\    $$\ $$$$$$$$\ $$$$$$$\ $$$$$$$$\ $$$$$$$$\ $$$$$$$\  
@@ -16,6 +17,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |  \$$$  /  $$ |      $$ |  $$ |  $$ |   $$ |      
     while True:
         menu()
 
+# Функция вывода меню
 def menu():
     print()
     print("Что вы хотите сделать?")
@@ -32,6 +34,7 @@ def menu():
     except ValueError:
         print("Введите число!")
 
+# Функция вывода меню конвертаций
 def convert_menu():
     print()
     print("Что вы хотите конвертировать?")
@@ -52,6 +55,7 @@ def convert_menu():
     else:
         print("Неверный ввод!")
 
+# Функция вывода линейных конвертаций
 def convert_linear_menu(category):
     print("\nДоступные единицы:")
     for unit in conversions.UNITS[category]:
@@ -67,6 +71,7 @@ def convert_linear_menu(category):
     except Exception as e:
         print("Ошибка:", e)
 
+# Функция вывода меню конвертаций температур
 def convert_temperature_menu():
     print("""
 1. Цельсий --> Фаренгейт

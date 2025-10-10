@@ -1,11 +1,7 @@
-def startup():
-    print(
-        "░█▀▀░█▀█░█▀█░█░█░█▀▀░█▀▄░▀█▀\n"
-        "░█░░░█░█░█░█░▀▄▀░█▀▀░█▀▄░░█░\n"
-        "░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░░▀░")
+import core.view as view
 
 def main():
-    startup()
+    view.startup()
 
 if __name__ == "__main__":
     main()

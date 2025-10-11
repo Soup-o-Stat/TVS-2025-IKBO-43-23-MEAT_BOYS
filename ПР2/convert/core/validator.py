@@ -7,14 +7,12 @@ def validate_numeric_input(value_str):
 
 # Функция проверки что число положительное
 def validate_positive_number(value):
-    """Проверяет, что число положительное"""
     if value < 0:
         raise ValueError("Ошибка: значение должно быть положительным")
     return value
 
 # Функция проверки допустимости температуры
 def validate_temperature_range(value, scale):
-    """Проверяет допустимость температуры"""
     ranges = {
         'c': (-273.15, 10000),
         'f': (-459.67, 18032),

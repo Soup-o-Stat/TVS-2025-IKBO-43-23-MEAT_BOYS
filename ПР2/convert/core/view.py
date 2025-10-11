@@ -68,8 +68,7 @@ def convert_linear_menu(category):
         value_str = input("\nВведите значение: ")
 
         value = validator.validate_numeric_input(value_str)
-        value = validator.validate_positive_number(value_str)
-        value = validator.validate_numeric_input(value_str)
+        value = validator.validate_positive_number(value)
 
         from_unit = input("Из (например, метр): ").strip().lower()
         to_unit = input("В (например, километр): ").strip().lower()

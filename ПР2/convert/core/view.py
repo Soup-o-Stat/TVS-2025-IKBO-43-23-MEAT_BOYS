@@ -1,5 +1,8 @@
 import time
 import core.convert_script as conversions
+import core.validator as validator
+import core.unit_formater as unit_formater
+import core.history as history
 
 # Функция запуска
 def startup():
@@ -62,12 +65,22 @@ def convert_linear_menu(category):
         print(" -", unit)
 
     try:
-        value = float(input("\nВведите значение: "))
+        value_str = input("\nВведите значение: ")
+
+        value = validator.validate_numeric_input(value_str)
+        value = validator.validate_positive_number(value_str)
+        value = validator.validate_numeric_input(value_str)
+
         from_unit = input("Из (например, метр): ").strip().lower()
         to_unit = input("В (например, километр): ").strip().lower()
 
+        validator.validate_unit_exists(category, from_unit)
+        validator.validate_unit_exists(category, to_unit)
+        
         result = conversions.convert_linear(category, value, from_unit, to_unit)
-        print(f"\n{value} {from_unit} = {result} {to_unit}\n")
+        formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+        print(f"\n{formated_result}\n")
+
     except Exception as e:
         print("Ошибка:", e)
 
@@ -82,25 +95,58 @@ def convert_temperature_menu():
 6. Кельвин --> Фаренгейт
 0. Назад
 """)
-    choice = input(">> ")
-    if choice == "0":
-        return
-
     try:
-        value = float(input("Введите значение: "))
+        str_choice = input(">> ")
+        choice = validator.validate_numeric_input(str_choice)
 
-        if choice == "1":
-            print(value, "°C =", conversions.c_to_f(value), "°F")
-        elif choice == "2":
-            print(value, "°F =", conversions.f_to_c(value), "°C")
-        elif choice == "3":
-            print(value, "°C =", conversions.c_to_k(value), "K")
-        elif choice == "4":
-            print(value, "K =", conversions.k_to_c(value), "°C")
-        elif choice == "5":
-            print(value, "°F =", conversions.f_to_k(value), "K")
-        elif choice == "6":
-            print(value, "K =", conversions.k_to_f(value), "°F")
+        if choice == 0:
+            return
+
+        str_value = input("Введите значение: ")
+        value = validator.validate_numeric_input(str_value)
+
+        if choice == 1:
+            from_unit = "c"
+            value = validator.validate_temperature_range(value, from_unit)
+            to_unit = "f"
+            result = conversions.c_to_f(value)
+            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+            print(f"\n{formated_result}\n")
+        elif choice == 2:
+            from_unit = "f"
+            value = validator.validate_temperature_range(value, from_unit)
+            to_unit = "c"
+            result = conversions.f_to_c(value)
+            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+            print(f"\n{formated_result}\n")
+        elif choice == 3:
+            from_unit = "c"
+            value = validator.validate_temperature_range(value, from_unit)
+            to_unit = "k"
+            result = conversions.c_to_k(value)
+            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+            print(f"\n{formated_result}\n")
+        elif choice == 4:
+            from_unit = "k"
+            value = validator.validate_temperature_range(value, from_unit)
+            to_unit = "c"
+            result = conversions.k_to_c(value)
+            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+            print(f"\n{formated_result}\n")
+        elif choice == 5:
+            from_unit = "f"
+            value = validator.validate_temperature_range(value, from_unit)
+            to_unit = "k"
+            result = conversions.f_to_k(value)
+            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+            print(f"\n{formated_result}\n")
+        elif choice == 6:
+            from_unit = "k"
+            value = validator.validate_temperature_range(value, from_unit)
+            to_unit = "f"
+            result = conversions.k_to_f(value)
+            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+            print(f"\n{formated_result}\n")
         else:
             print("Неверный выбор!")
     except ValueError:

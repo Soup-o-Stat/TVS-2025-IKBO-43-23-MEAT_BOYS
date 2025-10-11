@@ -4,10 +4,9 @@ import core.validator as validator
 import core.unit_formater as unit_formater
 import core.history as history
 
-# Функция запуска
 def startup():
-    print("""
-$$$$$$\   $$$$$$\  $$\   $$\ $$\    $$\ $$$$$$$$\ $$$$$$$\ $$$$$$$$\ $$$$$$$$\ $$$$$$$\  
+    print(r"""
+/$$$$$\   $$$$$$\  $$\   $$\ $$\    $$\ $$$$$$$$\ $$$$$$$\ $$$$$$$$\ $$$$$$$$\ $$$$$$$\  
 $$  __$$\ $$  __$$\ $$$\  $$ |$$ |   $$ |$$  _____|$$  __$$\\__$$  __|$$  _____|$$  __$$\ 
 $$ /  \__|$$ /  $$ |$$$$\ $$ |$$ |   $$ |$$ |      $$ |  $$ |  $$ |   $$ |      $$ |  $$ |
 $$ |      $$ |  $$ |$$ $$\$$ |\$$\  $$  |$$$$$\    $$$$$$$  |  $$ |   $$$$$\    $$$$$$$  |
@@ -20,16 +19,20 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |  \$$$  /  $$ |      $$ |  $$ |  $$ |   $$ |      
     while True:
         menu()
 
-# Функция вывода меню
+#Главное меню
 def menu():
     print()
     print("Что вы хотите сделать?")
     print("1. Конвертировать")
+    print("2. Посмотреть историю")
     print("0. Выйти")
+
     try:
         choice = int(input(">> "))
         if choice == 1:
             convert_menu()
+        elif choice == 2:
+            history_menu()
         elif choice == 0:
             exit()
         else:
@@ -37,7 +40,64 @@ def menu():
     except ValueError:
         print("Введите число!")
 
-# Функция вывода меню конвертаций
+#Меню истории
+def history_menu():
+    while True:
+        print("\nИстория конвертаций:")
+        print("1. Последние 5 конвертаций")
+        print("2. Вся история")
+        print("3. Статистика")
+        print("4. Очистить историю")
+        print("0. Назад")
+        choice = input(">> ")
+        if choice == "1":
+            show_recent_history()
+        elif choice == "2":
+            show_full_history()
+        elif choice == "3":
+            show_statistics()
+        elif choice == "4":
+            history.clear_history()
+            print("История очищена.")
+        elif choice == "0":
+            return
+        else:
+            print("Неверный ввод!")
+
+def show_recent_history():
+    data = history.get_recent_conversions(5)
+    if not data:
+        print("История пуста.")
+        return
+    print("\nПоследние 5 конвертаций:")
+    for entry in data:
+        print(
+            f"[{entry['timestamp']}] {entry['category']}: {entry['value']} {entry['from_unit']} → {entry['result']} {entry['to_unit']}")
+
+def show_full_history():
+    data = history.load_history()
+    if not data:
+        print("История пуста.")
+        return
+    print("\nВся история:")
+    for entry in data:
+        print(
+            f"[{entry['timestamp']}] {entry['category']}: {entry['value']} {entry['from_unit']} → {entry['result']} {entry['to_unit']}")
+
+def show_statistics():
+    stats = history.get_statistics()
+    if stats["total"] == 0:
+        print("История пуста.")
+        return
+    print("\nСтатистика:")
+    print(f"Всего конвертаций: {stats['total']}")
+    print("По категориям:")
+    for cat, count in stats["by_category"].items():
+        print(f" - {cat}: {count}")
+    print(f"Первая: {stats['first_conversion']}")
+    print(f"Последняя: {stats['last_conversion']}")
+
+#Меню выбора типа конвертации
 def convert_menu():
     print()
     print("Что вы хотите конвертировать?")
@@ -58,7 +118,7 @@ def convert_menu():
     else:
         print("Неверный ввод!")
 
-# Функция вывода линейных конвертаций
+#Конвертации длины/массы
 def convert_linear_menu(category):
     print("\nДоступные единицы:")
     for unit in conversions.UNITS[category]:
@@ -66,7 +126,6 @@ def convert_linear_menu(category):
 
     try:
         value_str = input("\nВведите значение: ")
-
         value = validator.validate_numeric_input(value_str)
         value = validator.validate_positive_number(value)
 
@@ -75,15 +134,17 @@ def convert_linear_menu(category):
 
         validator.validate_unit_exists(category, from_unit)
         validator.validate_unit_exists(category, to_unit)
-        
+
         result = conversions.convert_linear(category, value, from_unit, to_unit)
         formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
         print(f"\n{formated_result}\n")
 
+        history.add_conversion(category, value, from_unit, to_unit, result)
+
     except Exception as e:
         print("Ошибка:", e)
 
-# Функция вывода меню конвертаций температур
+#Конвертации температур
 def convert_temperature_menu():
     print("""
 1. Цельсий --> Фаренгейт
@@ -104,49 +165,30 @@ def convert_temperature_menu():
         str_value = input("Введите значение: ")
         value = validator.validate_numeric_input(str_value)
 
-        if choice == 1:
-            from_unit = "c"
-            value = validator.validate_temperature_range(value, from_unit)
-            to_unit = "f"
-            result = conversions.c_to_f(value)
-            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
-            print(f"\n{formated_result}\n")
-        elif choice == 2:
-            from_unit = "f"
-            value = validator.validate_temperature_range(value, from_unit)
-            to_unit = "c"
-            result = conversions.f_to_c(value)
-            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
-            print(f"\n{formated_result}\n")
-        elif choice == 3:
-            from_unit = "c"
-            value = validator.validate_temperature_range(value, from_unit)
-            to_unit = "k"
-            result = conversions.c_to_k(value)
-            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
-            print(f"\n{formated_result}\n")
-        elif choice == 4:
-            from_unit = "k"
-            value = validator.validate_temperature_range(value, from_unit)
-            to_unit = "c"
-            result = conversions.k_to_c(value)
-            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
-            print(f"\n{formated_result}\n")
-        elif choice == 5:
-            from_unit = "f"
-            value = validator.validate_temperature_range(value, from_unit)
-            to_unit = "k"
-            result = conversions.f_to_k(value)
-            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
-            print(f"\n{formated_result}\n")
-        elif choice == 6:
-            from_unit = "k"
-            value = validator.validate_temperature_range(value, from_unit)
-            to_unit = "f"
-            result = conversions.k_to_f(value)
-            formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
-            print(f"\n{formated_result}\n")
-        else:
+        conversions_map = {
+            1: ("цельсий", "фаренгейт", conversions.c_to_f),
+            2: ("фаренгейт", "цельсий", conversions.f_to_c),
+            3: ("цельсий", "кельвин", conversions.c_to_k),
+            4: ("кельвин", "цельсий", conversions.k_to_c),
+            5: ("фаренгейт", "кельвин", conversions.f_to_k),
+            6: ("кельвин", "фаренгейт", conversions.k_to_f)
+        }
+
+        if choice not in conversions_map:
             print("Неверный выбор!")
+            return
+
+        from_unit, to_unit, func = conversions_map[choice]
+        value = validator.validate_temperature_range(value, from_unit[0])
+        result = func(value)
+
+        formated_result = unit_formater.format_conversion_result(value, from_unit, result, to_unit)
+        print(f"\n{formated_result}\n")
+
+        history.add_conversion("температура", value, from_unit, to_unit, result)
+
     except ValueError:
         print("Ошибка: введите число!")
+
+if __name__ == "__main__":
+    startup()

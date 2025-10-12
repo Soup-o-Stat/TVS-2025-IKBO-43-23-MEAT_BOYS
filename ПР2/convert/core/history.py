@@ -2,6 +2,8 @@ import json
 import datetime
 from pathlib import Path
 
+debug = False
+
 FILENAME = Path("conversion_history.json")
 
 def load_history():
@@ -15,6 +17,11 @@ def save_history(history):
     #Сохранить историю в файл
     with open(FILENAME, 'w', encoding='utf-8') as f:
         json.dump(history, f, ensure_ascii=False, indent=2)
+        print("Json has been saved.")
+        if debug:
+            print("-------------------")
+            print(f"history: {history}")
+            print("-------------------")
 
 def add_conversion(category, value, from_unit, to_unit, result):
     #Добавить запись о конвертации

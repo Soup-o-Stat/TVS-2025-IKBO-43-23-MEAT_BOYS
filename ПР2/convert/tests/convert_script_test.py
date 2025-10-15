@@ -1,5 +1,5 @@
 import pytest
-from convert.core import convert_script as conv
+import core.convert_script as conv
 
 class TestConvertScript:
     

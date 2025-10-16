@@ -1,0 +1,66 @@
+[
+  {
+    "timestamp": "2025-10-16T14:41:57.775068",
+    "category": "длина",
+    "value": 100,
+    "from_unit": "см",
+    "to_unit": "м",
+    "result": 1.0
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.796263",
+    "category": "масса",
+    "value": 1000,
+    "from_unit": "г",
+    "to_unit": "кг",
+    "result": 1.0
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.811794",
+    "category": "длина",
+    "value": 2,
+    "from_unit": "м",
+    "to_unit": "км",
+    "result": 0.002
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.849983",
+    "category": "длина",
+    "value": 100,
+    "from_unit": "см",
+    "to_unit": "м",
+    "result": 1.0
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.873454",
+    "category": "масса",
+    "value": 1000,
+    "from_unit": "г",
+    "to_unit": "кг",
+    "result": 1.0
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.891684",
+    "category": "длина",
+    "value": 2,
+    "from_unit": "м",
+    "to_unit": "км",
+    "result": 0.002
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.924704",
+    "category": "длина",
+    "value": 100,
+    "from_unit": "см",
+    "to_unit": "м",
+    "result": 1.0
+  },
+  {
+    "timestamp": "2025-10-16T14:41:57.950705",
+    "category": "длина",
+    "value": 150,
+    "from_unit": "см",
+    "to_unit": "м",
+    "result": 1.5
+  }
+]

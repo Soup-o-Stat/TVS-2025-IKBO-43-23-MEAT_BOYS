@@ -63,14 +63,12 @@ def format_conversion_result(value, from_unit, result, to_unit):
 
 # Функция форматирования записи истории для красивого вывода
 def format_history_entry(entry):
-    timestamp = datetime.fromisoformat(entry['timestamp'])
+    timestamp = datetime.datetime.fromisoformat(entry['timestamp'])
     date_str = timestamp.strftime("%d.%m.%Y %H:%M")
-    
     result_str = format_conversion_result(
         entry['value'],
         entry['from_unit'],
         entry['result'],
         entry['to_unit']
     )
-    
     return f"[{date_str}] {result_str}"

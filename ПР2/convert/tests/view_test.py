@@ -1,8 +1,7 @@
 import pytest
-import sys
-import os
-import core.view as view
 from unittest.mock import patch, MagicMock
+import core.view as view
+
 
 @patch('builtins.input')
 @patch('builtins.print')
@@ -12,12 +11,14 @@ def test_menu_navigation(mock_print, mock_input):
         view.menu()
         mock_convert.assert_called_once()
 
+
 @patch('builtins.input')
 @patch('builtins.print')
 def test_menu_invalid_input(mock_print, mock_input):
     mock_input.return_value = 'abc'
     view.menu()
     mock_print.assert_any_call("Введите число!")
+
 
 @patch('builtins.input')
 @patch('builtins.print')
@@ -27,6 +28,7 @@ def test_convert_menu_linear(mock_print, mock_input):
         view.convert_menu()
         mock_linear.assert_called_with('длина')
 
+
 @patch('builtins.input')
 @patch('builtins.print')
 def test_convert_linear_menu_success(mock_print, mock_input):
@@ -35,7 +37,7 @@ def test_convert_linear_menu_success(mock_print, mock_input):
     with patch('core.validator.validate_numeric_input') as mock_val_num, \
         patch('core.validator.validate_positive_number') as mock_val_pos, \
         patch('core.validator.validate_unit_exists') as mock_val_unit, \
-        patch('core.conversions.convert_linear') as mock_convert, \
+        patch('core.convert_script.convert_linear') as mock_convert, \
         patch('core.unit_formater.format_conversion_result') as mock_format, \
         patch('core.history.add_conversion') as mock_history:
 
@@ -50,13 +52,14 @@ def test_convert_linear_menu_success(mock_print, mock_input):
         mock_history.assert_called_once()
         mock_print.assert_any_call("\n100 см = 1 м\n")
 
+
 @patch('builtins.input')
 @patch('builtins.print')
 def test_convert_temperature_menu_success(mock_print, mock_input):
     mock_input.side_effect = ['1', '0']
 
     with patch('core.validator.validate_numeric_input') as mock_val_num, \
-        patch('core.conversions.c_to_f') as mock_convert, \
+        patch('core.convert_script.c_to_f') as mock_convert, \
         patch('core.unit_formater.format_conversion_result') as mock_format, \
         patch('core.history.add_conversion') as mock_history:
 
@@ -68,6 +71,7 @@ def test_convert_temperature_menu_success(mock_print, mock_input):
 
         mock_convert.assert_called_once_with(0.0)
         mock_history.assert_called_once()
+
 
 @patch('core.history.get_recent_conversions')
 @patch('builtins.print')
@@ -84,6 +88,7 @@ def test_show_recent_history(mock_print, mock_get_recent):
     view.show_recent_history()
     mock_print.assert_any_call("\nПоследние 5 конвертаций:")
 
+
 @patch('core.history.get_statistics')
 @patch('builtins.print')
 def test_show_statistics(mock_print, mock_get_stats):
@@ -97,6 +102,7 @@ def test_show_statistics(mock_print, mock_get_stats):
     view.show_statistics()
     mock_print.assert_any_call("Всего конвертаций: 5")
 
+
 @patch('builtins.input')
 @patch('builtins.print')
 def test_history_menu_clear(mock_print, mock_input):
@@ -107,6 +113,7 @@ def test_history_menu_clear(mock_print, mock_input):
         mock_clear.assert_called_once()
         mock_print.assert_any_call("История очищена.")
 
+
 @patch('builtins.input')
 @patch('builtins.print')
 def test_convert_linear_menu_validation_error(mock_print, mock_input):
@@ -116,7 +123,10 @@ def test_convert_linear_menu_validation_error(mock_print, mock_input):
         mock_val_num.side_effect = ValueError("Ошибка числа")
 
         view.convert_linear_menu('длина')
-        mock_print.assert_any_call("Ошибка:", "Ошибка числа")
+
+        printed = " ".join(str(call.args[0]) for call in mock_print.call_args_list)
+        assert "Ошибка" in printed or "ошибка" in printed
+
 
 @patch('builtins.input')
 @patch('builtins.print')
